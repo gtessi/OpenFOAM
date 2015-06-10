@@ -1,0 +1,125 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       polyTopoChanger;
+    location    "constant/polyMesh";
+    object      meshModifiers;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+8
+(
+tapaArribaLayer
+{
+    type layerAdditionRemovalMC;
+    faceZoneName tapaArriba;
+    removeFactor 0.5;
+    addFactor 1.5;
+    oldLayerThickness -1;
+    addFactor 0;
+    modifierName 0;
+    groupName 0;
+    active true;
+}
+
+tapaAbajoLayer
+{
+    type layerAdditionRemovalMC;
+    faceZoneName tapaAbajo;
+    removeFactor 0.5;
+    addFactor 1.5;
+    oldLayerThickness -1;
+    addFactor 0;
+    modifierName 1;
+    groupName 0;
+    active true;
+}
+
+tapaIzquierdaLayer
+{
+    type layerAdditionRemovalMC;
+    faceZoneName tapaIzquierda;
+    removeFactor 0.5;
+    addFactor 1.5;
+    oldLayerThickness -1;
+    addFactor 0;
+    modifierName 2;
+    groupName 1;
+    active true;
+}
+
+tapaDerechaLayer
+{
+    type layerAdditionRemovalMC;
+    faceZoneName tapaDerecha;
+    removeFactor 0.5;
+    addFactor 1.5;
+    oldLayerThickness -1;
+    addFactor 0;
+    modifierName 3;
+    groupName 1;
+    active true;
+}
+
+horizontal1SupLayer
+{
+    type layerAdditionRemovalMC;
+    faceZoneName horizontal1Sup;
+    removeFactor 0.5;
+    addFactor 1.5;
+    oldLayerThickness -1;
+    addFactor 0;
+    modifierName 4;
+    groupName 0;
+    active true;
+}
+
+horizontal2InfLayer
+{
+    type layerAdditionRemovalMC;
+    faceZoneName horizontal2Inf;
+    removeFactor 0.5;
+    addFactor 1.5;
+    oldLayerThickness -1;
+    addFactor 0;
+    modifierName 7;
+    groupName 0;
+    active true;
+}
+
+vertical1DerLayer
+{
+    type layerAdditionRemovalMC;
+    faceZoneName vertical1Der;
+    removeFactor 0.5;
+    addFactor 1.5;
+    oldLayerThickness -1;
+    addFactor 0;
+    modifierName 9;
+    groupName 1;
+    active true;
+}
+
+vertical2IzqLayer
+{
+    type layerAdditionRemovalMC;
+    faceZoneName vertical2Izq;
+    removeFactor 0.5;
+    addFactor 1.5;
+    oldLayerThickness -1;
+    addFactor 0;
+    modifierName 10;
+    groupName 1;
+    active true;
+}
+)
+
+// ************************************************************************* //

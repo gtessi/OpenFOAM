@@ -1,0 +1,14 @@
+#!/bin/bash
+# My first script
+
+echo "** Creating time and cells files"
+
+for i in {0..3}
+do
+	checkMesh -case processor$i > processor$i.log
+	
+	cat processor$i.log | grep "Time = " | cut -d " " -f 3 > processor${i}time.dat
+	cat processor$i.log | grep "cells:" | cut -d " " -f 17 > processor${i}cells.dat
+done
+
+echo "** Done!"

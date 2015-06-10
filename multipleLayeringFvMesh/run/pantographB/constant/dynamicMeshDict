@@ -1,0 +1,226 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM Extend Project: Open Source CFD        |
+|  \\    /   O peration     | Version:  1.6-ext                               |
+|   \\  /    A nd           | Web:      www.extend-project.de                 |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      dynamicMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+//LAYERING
+
+dynamicFvMesh      multipleLayeringFvMesh;
+dynamicFvMeshLibs ("multipleLayering4.so");
+
+multipleLayeringFvMeshCoeffs
+{
+    groups
+    (
+        // movil horizontal
+        {
+            movingCells     movilHorizontal;
+            frontFaces      tapaArriba;
+            backFaces       tapaAbajo;
+            movingPoints    cuboPuntos;
+
+            solidBodyMotionFunction  oscillatingLinearMotion;
+
+            oscillatingLinearMotionCoeffs
+            {
+                amplitude          (0 0.3 0);
+                omega               6.2831;
+            }
+
+            front
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  0;
+                groupValue          0;
+            }
+
+            back
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  1;
+                groupValue          0;
+            }
+        }
+
+        // movil vertical
+        {
+            movingCells     movilVertical;
+            frontFaces      tapaIzquierda;
+            backFaces       tapaDerecha;
+            movingPoints    cuboPuntos;
+
+            solidBodyMotionFunction  oscillatingCosLinearMotion;
+
+            oscillatingCosLinearMotionCoeffs
+            {
+                amplitude          (0.3 0 0);
+                omega               6.2831;
+            }
+
+            front
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  2;
+                groupValue          1;
+            }
+
+            back
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  3;
+                groupValue          1;
+            }
+        }
+
+
+        {
+            movingCells     none;
+            frontFaces      horizontal1Sup;
+            backFaces       horizontal1Inf;
+            movingPoints    none;
+
+            solidBodyMotionFunction  oscillatingLinearMotion;
+
+            oscillatingLinearMotionCoeffs
+            {
+                amplitude          (0 0.1716 0);
+                omega               6.2831;
+            }
+
+
+            front
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  4;
+                groupValue          0;
+            }
+
+            back
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  5;
+                groupValue          0;
+            }
+        }
+
+
+        {
+            movingCells     none;
+            frontFaces      horizontal2Sup;
+            backFaces       horizontal2Inf;
+            movingPoints    none;
+
+            solidBodyMotionFunction  oscillatingLinearMotion;
+
+            oscillatingLinearMotionCoeffs
+            {
+                amplitude          (0 0.1713 0);
+                omega               6.2831;
+            }
+
+
+            front
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  6;
+                groupValue          0;
+            }
+
+            back
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  7;
+                groupValue          0;
+            }
+        }
+
+
+        {
+            movingCells     none;
+            frontFaces      vertical1Izq;
+            backFaces       vertical1Der;
+            movingPoints    none;
+
+            solidBodyMotionFunction  oscillatingCosLinearMotion;
+
+            oscillatingCosLinearMotionCoeffs
+            {
+                amplitude          (0.1637 0 0);
+                omega               6.2831;
+            }
+
+
+            front
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  8;
+                groupValue          1;
+            }
+
+            back
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  9;
+                groupValue          1;
+            }
+        }
+
+
+        {
+            movingCells     none;
+            frontFaces      vertical2Izq;
+            backFaces       vertical2Der;
+            movingPoints    none;
+
+            solidBodyMotionFunction  oscillatingCosLinearMotion;
+
+            oscillatingCosLinearMotionCoeffs
+            {
+                amplitude          (0.1993 0 0);
+                omega               6.2831;
+            }
+
+
+            front
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  10;
+                groupValue          1;
+            }
+
+            back
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  11;
+                groupValue          1;
+            }
+        }
+
+
+    );
+}
+
+// ************************************************************************* //

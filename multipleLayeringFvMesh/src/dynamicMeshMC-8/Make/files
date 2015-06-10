@@ -1,0 +1,10 @@
+layerAdditionRemovalMC/addCellLayer.C
+layerAdditionRemovalMC/removeCellLayer.C
+layerAdditionRemovalMC/setLayerPairing.C
+layerAdditionRemovalMC/layerAdditionRemovalMC.C
+linearRotatingMotion/linearRotatingMotion.C
+oscillatingCosLinearMotion/oscillatingCosLinearMotion.C
+oscillatingLinearRotatingMotion/oscillatingLinearRotatingMotion.C
+circularLinearRotatingMotion/circularLinearRotatingMotion.C
+
+LIB = $(FOAM_USER_LIBBIN)/libdynamicMeshMC-8

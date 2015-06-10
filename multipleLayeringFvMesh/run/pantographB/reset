@@ -1,0 +1,8 @@
+#!/bin/bash
+# My first script
+
+echo "** Reseting case..."
+
+rm -rf processor*/[1-9]* processor*/0.*
+
+echo "** Done!"

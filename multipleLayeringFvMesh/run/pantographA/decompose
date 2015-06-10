@@ -1,0 +1,84 @@
+#!/bin/bash
+
+#User Parameters
+echo "User parameters"
+lx=1
+ly=1
+nx=200
+ny=200
+a=0.6875
+b=0.4375
+h=0.125
+
+np=4 #the number of processors can not be a prime number (except 2)
+
+echo "Fixing float point parameters"
+octave --silent --eval "fixFloat(\"$a\",\"$b\",\"$h\",\"$lx\",\"$ly\",\"$nx\",\"$ny\")"
+
+a=`head -n 1 fixedValues.dat | tail -n 1 | cut -d" " -f1`
+b=`head -n 2 fixedValues.dat | tail -n 1 | cut -d" " -f1`
+h=`head -n 3 fixedValues.dat | tail -n 1 | cut -d" " -f1`
+
+rm fixedValues.dat
+
+echo "Executing blockMesh"
+blockMesh > blockMesh.log
+
+echo "Executing serial topoSet"
+topoSet > topoSet.log
+
+echo "Executing setsToZones"
+setsToZones > setsToZones.log
+
+echo "Removing sets except master cells set"
+find constant/polyMesh/sets -type f -not -name 'c0' -delete
+
+echo "Writing Cell Centres"
+writeCellCentres > writeCellCentres.log
+
+for i in {1..20}
+do
+	sed -i '1d' 0/ccx
+	sed -i '1d' 0/ccy
+done
+
+ncells=`head -n 1 0/ccx`
+sed -i '1d' 0/ccx
+sed -i '1d' 0/ccx
+sed -i '1d' 0/ccy
+sed -i '1d' 0/ccy
+ccx_file=`head -n $ncells 0/ccx`
+ccy_file=`head -n $ncells 0/ccy`
+echo $ccx_file > 0/ccx
+echo $ccy_file > 0/ccy
+
+echo "Partitioning"
+octave --silent --eval "proc(\"$a\",\"$b\",\"$h\")"
+
+rm 0/ccx
+rm 0/ccy
+rm 0/ccz
+
+ncells=`wc -l proc.dat | cut -d" " -f1`
+cp templates/header constant/manualProc
+echo "" >> constant/manualProc
+echo $ncells >> constant/manualProc
+echo "(" >> constant/manualProc
+cat proc.dat >> constant/manualProc
+echo ");" >> constant/manualProc
+
+rm proc.dat
+
+echo "Decomposing into sub-domains"
+decomposePar -cellDist > decomposePar.log
+
+for i in processor*
+do
+	paraFoam -case $i -touch
+done
+
+
+echo "Done!"
+
+
+

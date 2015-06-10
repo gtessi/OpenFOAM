@@ -1,0 +1,137 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+
+    {
+        name    horizontal1Inf;
+        type    faceSet;
+        action  new;
+        source  boxToFace;
+        sourceInfo
+        {
+            box   (0.0000000000 0.2499500000 0.000001) (1.0000000000 0.2500500000 0.999999);
+        }
+    }
+
+    {
+        name    horizontal1InfMasterCells;
+        type    cellSet;
+        action  new;
+        source  cellToCell;
+        sourceInfo
+        {
+            set c0;
+        }
+    }
+
+    {
+        name    horizontal1InfMasterCells;
+        type    cellSet;
+        action  invert;
+    }
+    
+    {
+        name    horizontal2Sup;
+        type    faceSet;
+        action  new;
+        source  boxToFace;
+        sourceInfo
+        {
+            box   (0.0000000000 0.7499500000 0.000001) (1.0000000000 0.7500500000 0.999999);
+        }
+    }
+
+    {
+        name    horizontal2SupMasterCells;
+        type    cellSet;
+        action  new;
+        source  cellToCell;
+        sourceInfo
+        {
+            set c0;
+        }
+    }
+
+    {
+        name    horizontal2SupMasterCells;
+        type    cellSet;
+        action  invert;
+    }
+
+    {
+        name    vertical1Izq;
+        type    faceSet;
+        action  new;
+        source  boxToFace;
+        sourceInfo
+        {
+            box   (0.3749500000 0.0000000000 0.000001) (0.3750500000 1.0000000000 0.999999);
+        }
+    }
+
+    {
+        name    vertical1IzqMasterCells;
+        type    cellSet;
+        action  new;
+        source  cellToCell;
+        sourceInfo
+        {
+            set c0;
+        }
+    }
+
+    {
+        name    vertical1IzqMasterCells;
+        type    cellSet;
+        action  invert;
+    }
+    
+    {
+        name    vertical2Der;
+        type    faceSet;
+        action  new;
+        source  boxToFace;
+        sourceInfo
+        {
+            box   (0.8749500000 0.0000000000 0.000001) (0.8750500000 1.0000000000 0.999999);
+        }
+    }
+
+    {
+        name    vertical2DerMasterCells;
+        type    cellSet;
+        action  new;
+        source  cellToCell;
+        sourceInfo
+        {
+            set c0;
+        }
+    }
+
+    {
+        name    vertical2DerMasterCells;
+        type    cellSet;
+        action  invert;
+    }
+
+///////////////////////////////////////////////////////////////////////////
+
+   
+);
+
+// ************************************************************************* //

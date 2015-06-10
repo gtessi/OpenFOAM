@@ -1,0 +1,65 @@
+#!/bin/bash
+
+#Starting position of the mobile arms
+a=0.45
+b=0.45
+h=0.1
+np=4
+
+echo "** Executing blockMesh"
+blockMesh > blockMesh.log
+
+echo "** Executing serial topoSet"
+topoSet > topoSet.log
+
+echo "** Writing Cell Centres"
+writeCellCentres > writeCellCentres.log
+
+for i in {1..20}
+do
+	sed -i '1d' 0/ccx
+	sed -i '1d' 0/ccy
+done
+
+ncells=`head -n 1 0/ccx`
+sed -i '1d' 0/ccx
+sed -i '1d' 0/ccx
+sed -i '1d' 0/ccy
+sed -i '1d' 0/ccy
+ccx_file=`head -n $ncells 0/ccx`
+ccy_file=`head -n $ncells 0/ccy`
+echo $ccx_file > 0/ccx
+echo $ccy_file > 0/ccy
+
+echo "** Partitioning"
+octave --silent --eval "proc(\"$a\",\"$b\",\"$h\")"
+
+rm 0/ccx
+rm 0/ccy
+rm 0/ccz
+
+ncells=`wc -l proc.dat | cut -d" " -f1`
+cp templates/header constant/manualProc
+echo "" >> constant/manualProc
+echo $ncells >> constant/manualProc
+echo "(" >> constant/manualProc
+cat proc.dat >> constant/manualProc
+echo ");" >> constant/manualProc
+
+rm proc.dat
+
+echo "** Decomposing into sub-domains"
+decomposePar -cellDist > decomposePar.log
+
+for i in processor*
+do
+	topoSet -case $i > $i/topoSet.log
+	setsToZones -case $i -noFlipMap > $i/setsToZones.log
+	paraFoam -case $i -touch
+done
+
+
+echo "** Done!"
+
+
+

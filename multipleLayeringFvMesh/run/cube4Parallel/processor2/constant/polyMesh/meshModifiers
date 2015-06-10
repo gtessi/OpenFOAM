@@ -1,0 +1,60 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       polyTopoChanger;
+    location    "constant/polyMesh";
+    object      meshModifiers;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+3
+(
+horizontalSupLayer
+{
+    type layerAdditionRemovalMC;
+    faceZoneName horizontalSup;
+    removeFactor 0.5;
+    addFactor 1.5;
+    oldLayerThickness -1;
+    addFactor 0;
+    modifierName 0;
+    groupName 0;
+    active true;
+}
+
+verticalDerLayer
+{
+    type layerAdditionRemovalMC;
+    faceZoneName verticalDer;
+    removeFactor 0.5;
+    addFactor 1.5;
+    oldLayerThickness -1;
+    addFactor 0;
+    modifierName 3;
+    groupName 1;
+    active true;
+}
+
+pistonTopLayer
+{
+    type layerAdditionRemovalMC;
+    faceZoneName pistonTop;
+    removeFactor 0.5;
+    addFactor 1.5;
+    oldLayerThickness -1;
+    addFactor 0;
+    modifierName 5;
+    groupName 0;
+    active true;
+}
+)
+
+// ************************************************************************* //

@@ -1,0 +1,196 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+
+    {
+        name    cubo;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box     (.68261904761904761905 .43261904761904761905 0) (.81238095238095238095 .56238095238095238095 1);
+        }
+    }
+
+    {
+        name    cuboPuntos;
+        type    pointSet;
+        action  new;
+        source  cellToPoint;
+        sourceInfo
+        {
+            set cubo;
+            option all;
+        }
+    }
+
+///////////////////////////////////////////////////////////////////////////
+
+    {
+        name    movilHorizontal;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box     (0 .43261904761904761905 0) (1 .56238095238095238095 1);
+        }
+    }
+
+    {
+        name    movilHorizontal;
+        type    cellSet;
+        action  delete;
+        source  cellToCell;
+        sourceInfo
+        {
+            set     cubo;
+        }
+    }
+
+    {
+        name    movilVertical;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box     (.68261904761904761905 0 0) (.81238095238095238095 1 1);
+        }
+    }
+
+    {
+        name    movilVertical;
+        type    cellSet;
+        action  delete;
+        source  cellToCell;
+        sourceInfo
+        {
+            set     cubo;
+        }
+    }
+
+///////////////////////////////////////////////////////////////////////////
+
+    {
+        name    tapaArriba;
+        type    faceSet;
+        action  new;
+        source  boxToFace;
+        sourceInfo
+        {
+            box   (0 .55761904761904761905 0) (1 .56238095238095238095 1);
+        }
+    }
+
+    {
+        name    tapaAbajo;
+        type    faceSet;
+        action  new;
+        source  boxToFace;
+        sourceInfo
+        {
+            box   (0 .43261904761904761905 0) (1 .43738095238095238095 1);
+        }
+    }
+
+    {
+        name    tapaIzquierda;
+        type    faceSet;
+        action  new;
+        source  boxToFace;
+        sourceInfo
+        {
+            box   (.68261904761904761905 0 0) (.68738095238095238095 1 1);
+        }
+    }
+
+    {
+        name    tapaDerecha;
+        type    faceSet;
+        action  new;
+        source  boxToFace;
+        sourceInfo
+        {
+            box   (.80761904761904761905 0 0) (.81238095238095238095 1 1);
+        }
+    }
+
+///////////////////////////////////////////////////////////////////////////
+
+    {
+        name    tapaArribaSlaveCells;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box     (0 .43261904761904761905 0) (1 .56238095238095238095 1);
+        }
+    }
+
+    {
+        name    tapaAbajoSlaveCells;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box     (0 .43261904761904761905 0) (1 .56238095238095238095 1);
+        }
+    }
+
+    {
+        name    tapaIzquierdaSlaveCells;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box     (.68261904761904761905 0 0) (.81238095238095238095 1 1);
+        }
+    }
+
+    {
+        name    tapaDerechaSlaveCells;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box     (.68261904761904761905 0 0) (.81238095238095238095 1 1);
+        }
+    }
+
+///////////////////////////////////////////////////////////////////////////
+
+   {
+        name    c0;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+           box   (0 0 0) (0 0 0);
+        }
+    }
+
+);
+
+// ************************************************************************* //

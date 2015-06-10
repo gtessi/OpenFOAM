@@ -1,0 +1,73 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       polyTopoChanger;
+    location    "constant/polyMesh";
+    object      meshModifiers;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+4
+(
+horizontal1InfLayer
+{
+    type layerAdditionRemovalMC;
+    faceZoneName horizontal1Inf;
+    removeFactor 0.5;
+    addFactor 1.5;
+    oldLayerThickness -1;
+    addFactor 0;
+    modifierName 5;
+    groupName 0;
+    active true;
+}
+
+horizontal2SupLayer
+{
+    type layerAdditionRemovalMC;
+    faceZoneName horizontal2Sup;
+    removeFactor 0.5;
+    addFactor 1.5;
+    oldLayerThickness -1;
+    addFactor 0;
+    modifierName 6;
+    groupName 0;
+    active true;
+}
+
+vertical1IzqLayer
+{
+    type layerAdditionRemovalMC;
+    faceZoneName vertical1Izq;
+    removeFactor 0.5;
+    addFactor 1.5;
+    oldLayerThickness -1;
+    addFactor 0;
+    modifierName 8;
+    groupName 1;
+    active true;
+}
+
+vertical2DerLayer
+{
+    type layerAdditionRemovalMC;
+    faceZoneName vertical2Der;
+    removeFactor 0.5;
+    addFactor 1.5;
+    oldLayerThickness -1;
+    addFactor 0;
+    modifierName 11;
+    groupName 1;
+    active true;
+}
+)
+
+// ************************************************************************* //

@@ -1,0 +1,141 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM Extend Project: Open Source CFD        |
+|  \\    /   O peration     | Version:  1.6-ext                               |
+|   \\  /    A nd           | Web:      www.extend-project.de                 |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      dynamicMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+//LAYERING
+
+dynamicFvMesh      multipleLayeringFvMesh;
+dynamicFvMeshLibs ("multipleLayering4.so");
+
+multipleLayeringFvMeshCoeffs
+{
+    groups
+    (
+        // horizontal
+        {
+            movingCells     none;
+            frontFaces      horizontalSup;
+            backFaces       horizontalInf;
+            movingPoints    none;
+
+            solidBodyMotionFunction  oscillatingLinearMotion;
+
+            oscillatingLinearMotionCoeffs
+            {
+                amplitude          (0 0.3 0);
+                omega               6.2831;
+            }
+
+            front
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  0;
+                groupValue          0;
+            }
+
+            back
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  1;
+                groupValue          0;
+            }
+        }
+
+        // vertical
+        {
+            movingCells     none;
+            frontFaces      verticalIzq;
+            backFaces       verticalDer;
+            movingPoints    none;
+
+            solidBodyMotionFunction  oscillatingCosLinearMotion;
+
+            oscillatingCosLinearMotionCoeffs
+            {
+                amplitude          (-0.3 0 0);
+                omega               6.2831;
+            }
+
+            front
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  2;
+                groupValue          1;
+            }
+
+            back
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  3;
+                groupValue          1;
+            }
+        }
+
+        // piston right
+        {
+            movingCells     none;
+            frontFaces      pistonRight;
+            backFaces       none;
+            movingPoints    none;
+
+            solidBodyMotionFunction  oscillatingCosLinearMotion;
+
+            oscillatingCosLinearMotionCoeffs
+            {
+                amplitude          (-0.3 0 0);
+                omega               6.2831;
+            }
+
+            front
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  4;
+                groupValue          1;
+            }
+        }
+
+        // piston top
+        {
+            movingCells     none;
+            frontFaces      pistonTop;
+            backFaces       none;
+            movingPoints    none;
+            
+            solidBodyMotionFunction  oscillatingLinearMotion;
+
+            oscillatingLinearMotionCoeffs
+            {
+                amplitude          (0 0.3 0);
+                omega               6.2831;
+            }
+
+
+            front
+            {
+                removeFactor        0.5;
+                addFactor           1.5;
+                frontModifierValue  5;
+                groupValue          0;
+            }
+        }
+    );
+}
+
+// ************************************************************************* //

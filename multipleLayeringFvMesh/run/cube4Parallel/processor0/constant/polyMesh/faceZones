@@ -1,0 +1,97 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       regIOobject;
+    location    "constant/polyMesh";
+    object      faceZones;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+4
+(
+pistonRight
+{
+    type faceZone;
+faceLabels      0();
+flipMap         0();
+}
+
+verticalDer
+{
+    type faceZone;
+faceLabels      List<label> 
+20
+(
+1600
+1601
+1602
+1603
+1604
+1605
+1606
+1607
+1608
+1609
+1610
+1611
+1612
+1613
+1614
+1615
+1616
+1617
+1618
+1619
+)
+;
+flipMap         List<bool> 20{1};
+}
+
+pistonTop
+{
+    type faceZone;
+faceLabels      0();
+flipMap         0();
+}
+
+horizontalInf
+{
+    type faceZone;
+faceLabels      List<label> 
+20
+(
+1620
+1621
+1622
+1623
+1624
+1625
+1626
+1627
+1628
+1629
+1630
+1631
+1632
+1633
+1634
+1635
+1636
+1637
+1638
+1639
+)
+;
+flipMap         List<bool> 20{1};
+}
+)
+
+// ************************************************************************* //
